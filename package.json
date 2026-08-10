@@ -1,0 +1,37 @@
+{
+  "name": "amazon-data-system",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "feishu:list-tables": "node scripts/feishu-list-tables.js",
+    "feishu:list-fields": "node scripts/feishu-list-fields.js",
+    "feishu:debug-fields": "node scripts/feishu-debug-fields-once.js",
+    "feishu:setup-prelaunch": "node scripts/feishu-setup-prelaunch-table.js",
+    "feishu:setup-prelaunch-core": "node scripts/feishu-setup-prelaunch-table.js --core",
+    "feishu:setup-amazon-system": "node scripts/feishu-setup-amazon-system.js",
+    "feishu:setup-au-referral-fees": "node scripts/feishu-setup-au-referral-fees.js",
+    "feishu:setup-ca-referral-fees": "node scripts/feishu-setup-ca-referral-fees.js",
+    "feishu:setup-us-referral-fees": "node scripts/feishu-setup-us-referral-fees.js",
+    "feishu:setup-delivery-sources": "node scripts/feishu-setup-delivery-sources.js",
+    "feishu:setup-delivery-overrides": "node scripts/feishu-setup-delivery-override-fields.js",
+    "feishu:setup-delivery-fee-rules": "node scripts/feishu-setup-delivery-fee-rules.js",
+    "feishu:setup-product-entry-fields": "node scripts/feishu-setup-product-entry-fields.js",
+    "feishu:generate-profit-rows": "node scripts/feishu-generate-profit-rows.js",
+    "feishu:seed-sample-product": "node scripts/feishu-seed-sample-product-entry.js",
+    "feishu:export-dashboard": "node scripts/feishu-export-dashboard-data.js",
+    "dashboard:serve": "node scripts/serve-dashboard.js",
+    "feishu:recalculate-profit": "node scripts/feishu-recalculate-profit.js",
+    "ocr:delivery-fees": "node scripts/ocr-images.js",
+    "feishu:sync": "node scripts/feishu-sync.js",
+    "feishu:dry-run": "node scripts/feishu-sync.js --dry-run",
+    "search:opportunities": "node scripts/analyze-search-opportunities.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "pdf-parse": "^2.4.5",
+    "sharp": "^0.35.3"
+  }
+}

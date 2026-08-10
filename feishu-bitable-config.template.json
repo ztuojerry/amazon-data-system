@@ -1,0 +1,129 @@
+{
+  "feishu": {
+    "app_id_env": "FEISHU_APP_ID",
+    "app_secret_env": "FEISHU_APP_SECRET",
+    "bitable_app_token_env": "FEISHU_BITABLE_APP_TOKEN",
+    "tables": {
+      "products": {
+        "name": "SKU主数据",
+        "table_id_env": "FEISHU_TABLE_PRODUCTS",
+        "primary_key": "external_id",
+        "fields": {
+          "external_id": "external_id",
+          "organization_id": "organization_id",
+          "amazon_account": "amazon_account",
+          "marketplace": "marketplace",
+          "sku": "sku",
+          "asin": "asin",
+          "product_name": "product_name",
+          "category": "category",
+          "lifecycle_status": "lifecycle_status",
+          "owner": "owner",
+          "remark": "remark",
+          "sync_status": "sync_status",
+          "sync_error": "sync_error",
+          "last_synced_at": "last_synced_at"
+        }
+      },
+      "cost_components": {
+        "name": "成本组件",
+        "table_id_env": "FEISHU_TABLE_COST_COMPONENTS",
+        "primary_key": "external_id",
+        "fields": {
+          "external_id": "external_id",
+          "sku": "sku",
+          "currency": "currency",
+          "purchase_cost": "purchase_cost",
+          "packaging_cost": "packaging_cost",
+          "inspection_cost": "inspection_cost",
+          "domestic_shipping": "domestic_shipping",
+          "first_leg_shipping": "first_leg_shipping",
+          "tariff_rate": "tariff_rate",
+          "other_cost": "other_cost",
+          "landed_cost": "landed_cost",
+          "effective_date": "effective_date",
+          "sync_status": "sync_status",
+          "sync_error": "sync_error",
+          "last_synced_at": "last_synced_at"
+        }
+      },
+      "pre_launch_calculations": {
+        "name": "上架前测算",
+        "table_id_env": "FEISHU_TABLE_PRE_LAUNCH",
+        "primary_key": "external_id",
+        "fields": {
+          "external_id": "external_id",
+          "sku": "sku",
+          "target_price": "target_price",
+          "estimated_referral_fee": "estimated_referral_fee",
+          "estimated_fba_fee": "estimated_fba_fee",
+          "estimated_acos": "estimated_acos",
+          "estimated_return_rate": "estimated_return_rate",
+          "coupon_cost": "coupon_cost",
+          "estimated_net_margin": "estimated_net_margin",
+          "estimated_roi": "estimated_roi",
+          "launch_decision": "launch_decision",
+          "sync_status": "sync_status",
+          "sync_error": "sync_error",
+          "last_synced_at": "last_synced_at"
+        }
+      },
+      "suppliers": {
+        "name": "供应商",
+        "table_id_env": "FEISHU_TABLE_SUPPLIERS",
+        "primary_key": "external_id",
+        "fields": {
+          "external_id": "external_id",
+          "supplier_name": "supplier_name",
+          "contact": "contact",
+          "phone": "phone",
+          "product_line": "product_line",
+          "moq": "moq",
+          "lead_time_days": "lead_time_days",
+          "payment_terms": "payment_terms",
+          "remark": "remark",
+          "sync_status": "sync_status",
+          "sync_error": "sync_error",
+          "last_synced_at": "last_synced_at"
+        }
+      },
+      "competitor_research": {
+        "name": "竞品调研",
+        "table_id_env": "FEISHU_TABLE_COMPETITORS",
+        "primary_key": "external_id",
+        "fields": {
+          "external_id": "external_id",
+          "sku": "sku",
+          "competitor_asin": "competitor_asin",
+          "competitor_price": "competitor_price",
+          "review_count": "review_count",
+          "rating": "rating",
+          "bsr": "bsr",
+          "pain_points": "pain_points",
+          "opportunity": "opportunity",
+          "research_date": "research_date",
+          "sync_status": "sync_status",
+          "sync_error": "sync_error",
+          "last_synced_at": "last_synced_at"
+        }
+      },
+      "operation_logs": {
+        "name": "运营动作记录",
+        "table_id_env": "FEISHU_TABLE_OPERATION_LOGS",
+        "primary_key": "external_id",
+        "fields": {
+          "external_id": "external_id",
+          "sku": "sku",
+          "date": "date",
+          "action_type": "action_type",
+          "owner": "owner",
+          "note": "note",
+          "status": "status",
+          "sync_status": "sync_status",
+          "sync_error": "sync_error",
+          "last_synced_at": "last_synced_at"
+        }
+      }
+    }
+  }
+}

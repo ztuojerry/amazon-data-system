@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Amazon 数据看板</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark">A</div>
+          <div>
+            <h1>Amazon 数据看板</h1>
+            <p id="exportedAt">等待数据</p>
+          </div>
+        </div>
+        <label class="search-box">
+          <span>SKU / 产品</span>
+          <input id="searchInput" type="search" placeholder="输入 SKU、ASIN 或产品名">
+        </label>
+        <div class="product-list" id="productList"></div>
+      </aside>
+
+      <section class="content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">产品经营概览</p>
+            <h2 id="productTitle">选择产品</h2>
+          </div>
+          <div class="toolbar">
+            <button id="refreshHint" type="button">刷新数据</button>
+          </div>
+        </header>
+
+        <section class="product-summary">
+          <div class="image-frame">
+            <img id="productImage" alt="产品主图">
+          </div>
+          <div class="summary-grid">
+            <div><span>SKU</span><strong id="skuValue">-</strong></div>
+            <div><span>ASIN</span><strong id="asinValue">-</strong></div>
+            <div><span>FNSKU</span><strong id="fnskuValue">-</strong></div>
+            <div><span>Brand</span><strong id="brandValue">-</strong></div>
+            <div><span>分类</span><strong id="categoryValue">-</strong></div>
+            <div><span>供应商</span><strong id="supplierValue">-</strong></div>
+          </div>
+        </section>
+
+        <section class="metrics-strip" id="metricsStrip"></section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h3>产品基本信息</h3>
+          </div>
+          <div class="detail-grid" id="productInfoGrid"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h3>成本试算</h3>
+            <div class="site-picker" id="calculatorSiteTabs"></div>
+          </div>
+          <div class="calculator-grid">
+            <div class="calculator-inputs" id="calculatorInputs"></div>
+            <div class="calculator-results" id="calculatorResults"></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h3>站点利润核算</h3>
+            <div class="legend">
+              <span><i class="dot air"></i>空运</span>
+              <span><i class="dot sea"></i>海运</span>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="profit-table">
+              <thead>
+                <tr>
+                  <th>站点</th>
+                  <th>售价</th>
+                  <th>采购成本</th>
+                  <th>运输成本</th>
+                  <th>配送费</th>
+                  <th>佣金</th>
+                  <th>利润额</th>
+                  <th>利润率</th>
+                  <th>投产比</th>
+                  <th>推荐</th>
+                  <th>配送费状态</th>
+                </tr>
+              </thead>
+              <tbody id="profitTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h3>配送费命中规则</h3>
+          </div>
+          <div id="deliveryRules" class="rule-list"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./data/dashboard-data.js"></script>
+    <script src="./assets/app.js"></script>
+  </body>
+</html>
