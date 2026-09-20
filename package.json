@@ -19,6 +19,7 @@
     "feishu:setup-product-entry-fields": "node scripts/feishu-setup-product-entry-fields.js",
     "feishu:generate-profit-rows": "node scripts/feishu-generate-profit-rows.js",
     "feishu:seed-sample-product": "node scripts/feishu-seed-sample-product-entry.js",
+    "feishu:upsert-mirlst11-ca": "node scripts/feishu-upsert-mirlst11-ca.js",
     "feishu:export-dashboard": "node scripts/feishu-export-dashboard-data.js",
     "dashboard:serve": "node scripts/serve-dashboard.js",
     "feishu:recalculate-profit": "node scripts/feishu-recalculate-profit.js",
