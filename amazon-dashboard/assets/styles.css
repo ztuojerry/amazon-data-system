@@ -96,17 +96,23 @@ input:focus {
 
 .product-list {
   display: grid;
-  gap: 8px;
+  gap: 10px;
 }
 
 .product-item {
   width: 100%;
+  height: auto;
+  min-height: 62px;
   border: 1px solid var(--line);
   background: var(--surface);
   border-radius: 8px;
-  padding: 10px;
+  padding: 10px 12px;
   text-align: left;
   cursor: pointer;
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  line-height: 1.25;
 }
 
 .product-item.active {
@@ -117,12 +123,19 @@ input:focus {
 .product-item strong {
   display: block;
   font-size: 13px;
-  margin-bottom: 4px;
+  line-height: 1.35;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .product-item span {
   color: var(--muted);
   font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .content {
