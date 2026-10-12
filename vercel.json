@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/xydc-keywords.js": {
+      "maxDuration": 30
+    }
+  }
+}

@@ -13,6 +13,7 @@ const els = {
   statusLine: document.getElementById('statusLine'),
   xydcStatusLine: document.getElementById('xydcStatusLine'),
   summaryGrid: document.getElementById('summaryGrid'),
+  keywordBuckets: document.getElementById('keywordBuckets'),
   resultMeta: document.getElementById('resultMeta'),
   siteFilter: document.getElementById('siteFilter'),
   layoutFilter: document.getElementById('layoutFilter'),
@@ -109,6 +110,7 @@ function render() {
   const rows = filteredRows();
   renderSiteFilter();
   renderSummary(rows);
+  renderKeywordBuckets(rows);
   renderTable(rows);
   renderSuggestions(rows);
   renderXydc();
@@ -179,6 +181,79 @@ function renderSummary(rows) {
   )).join('');
 }
 
+function renderKeywordBuckets(rows) {
+  const xydcRows = Array.isArray(state.xydc?.rows) ? state.xydc.rows : [];
+  const adRows = xydcRows.filter((row) => row.adRank || row.ad === true || row.ad === 'true' || row.ad === 1 || row.ad === '1');
+  const organicRows = xydcRows.filter((row) => row.organicRank);
+  const sourceRows = rows.filter((row) => number(row.clickShare) > 0);
+  const copyRows = rows.filter((row) => row.layout === '文案+广告');
+  const testRows = rows.filter((row) => row.layout === '广告测试');
+  const riskyRows = rows.filter((row) => row.layout === '谨慎观察' || row.competition === '高');
+  const stealRows = rows.filter((row) => row.layout !== '谨慎观察' && number(row.rank) > 300 && number(row.clickShare) < 35);
+
+  const buckets = [
+    {
+      title: '流量来源词',
+      meta: 'ABA 点击来源',
+      rows: sourceRows,
+      terms: topTerms(sourceRows, 10),
+    },
+    {
+      title: '自然排名词',
+      meta: '西柚自然位',
+      rows: organicRows,
+      terms: xydcTerms(organicRows, 10),
+    },
+    {
+      title: '广告投放词',
+      meta: '西柚广告位',
+      rows: adRows,
+      terms: xydcTerms(adRows, 10),
+    },
+    {
+      title: '可抢竞品词',
+      meta: '低/中竞争机会',
+      rows: stealRows,
+      terms: topTerms(stealRows, 10),
+    },
+    {
+      title: '文案必布局词',
+      meta: '标题/五点/A+',
+      rows: copyRows,
+      terms: topTerms(copyRows, 10),
+    },
+    {
+      title: '广告测试词',
+      meta: '精准/词组测试',
+      rows: testRows,
+      terms: topTerms(testRows, 10),
+    },
+    {
+      title: '高竞争慎入词',
+      meta: '先观察或低预算',
+      rows: riskyRows,
+      terms: topTerms(riskyRows, 10),
+    },
+  ];
+
+  els.keywordBuckets.innerHTML = buckets.map((bucket) => `
+    <article class="bucket-card">
+      <div class="bucket-head">
+        <div>
+          <h3>${escapeHtml(bucket.title)}</h3>
+          <p>${escapeHtml(bucket.meta)}</p>
+        </div>
+        <strong>${bucket.rows.length || '-'}</strong>
+      </div>
+      <div class="mini-tags">
+        ${bucket.terms.length
+          ? bucket.terms.map((term) => `<span>${escapeHtml(term)}</span>`).join('')
+          : '<em>暂无数据</em>'}
+      </div>
+    </article>
+  `).join('');
+}
+
 function renderTable(rows) {
   if (!rows.length) {
     const message = state.asin
@@ -244,6 +319,20 @@ function topTerms(rows, limit) {
     if (!key || seen.has(key)) continue;
     seen.add(key);
     terms.push(row.term);
+    if (terms.length >= limit) break;
+  }
+  return terms;
+}
+
+function xydcTerms(rows, limit) {
+  const seen = new Set();
+  const terms = [];
+  for (const row of rows) {
+    const term = row.term || row.keyword;
+    const key = normalizeTerm(term);
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    terms.push(term);
     if (terms.length >= limit) break;
   }
   return terms;

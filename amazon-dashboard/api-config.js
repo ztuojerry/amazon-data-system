@@ -1,0 +1,1 @@
+window.ASIN_KEYWORD_API_BASE = window.ASIN_KEYWORD_API_BASE || '';
