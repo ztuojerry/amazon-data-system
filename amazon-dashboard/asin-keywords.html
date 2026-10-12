@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ASIN 关键词反查</title>
+    <link rel="stylesheet" href="./assets/asin-keywords.css">
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Amazon Keyword Intelligence</p>
+          <h1>ASIN 流量关键词反查</h1>
+          <p class="subtle">输入竞品或自己链接 ASIN，查看 ABA 点击来源词、广告/文案布局建议和竞争风险。</p>
+        </div>
+        <a class="nav-link" href="./index.html">返回数据看板</a>
+      </header>
+
+      <section class="search-panel">
+        <label class="asin-input">
+          <span>ASIN</span>
+          <input id="asinInput" type="search" placeholder="例如 B0DPSJP47V" autocomplete="off">
+        </label>
+        <button id="searchButton" type="button">查询</button>
+        <button id="demoButton" type="button">试一个样例</button>
+      </section>
+
+      <section class="status-line" id="statusLine">本地服务模式可查全量 CSV；GitHub 静态模式读取预生成数据。</section>
+      <section class="status-line xydc-status" id="xydcStatusLine">西柚洞察：等待查询。</section>
+
+      <section class="summary-grid" id="summaryGrid"></section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>关键词来源</h2>
+            <p id="resultMeta" class="subtle">等待查询</p>
+          </div>
+          <div class="filters">
+            <select id="siteFilter" aria-label="站点筛选">
+              <option value="">全部站点</option>
+            </select>
+            <select id="layoutFilter" aria-label="布局筛选">
+              <option value="">全部建议</option>
+              <option value="文案+广告">文案+广告</option>
+              <option value="广告测试">广告测试</option>
+              <option value="谨慎观察">谨慎观察</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>站点</th>
+                <th>关键词</th>
+                <th>搜索排名</th>
+                <th>点击位置</th>
+                <th>点击份额</th>
+                <th>转化贡献</th>
+                <th>竞争判断</th>
+                <th>布局建议</th>
+                <th>同词竞争 ASIN</th>
+              </tr>
+            </thead>
+            <tbody id="keywordRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="insight-grid">
+        <article class="panel">
+          <h2>文案布局</h2>
+          <div id="copySuggestions" class="tag-list"></div>
+        </article>
+        <article class="panel">
+          <h2>广告布局</h2>
+          <div id="adSuggestions" class="tag-list"></div>
+        </article>
+        <article class="panel">
+          <h2>下一步验证</h2>
+          <ul class="check-list">
+            <li>前台搜索关键词，确认该 ASIN 自然位和 Sponsored 位。</li>
+            <li>用 Keepa/卖家精灵验证竞品上架时间、评论数、价格趋势。</li>
+            <li>导入自己的广告搜索词报告，对比已有曝光、点击、订单词。</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>西柚洞察补充</h2>
+            <p id="xydcMeta" class="subtle">用于补充 ABA 没命中的 ASIN：自然排名、广告排名、流量词等。</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="xydc-table">
+            <thead>
+              <tr>
+                <th>关键词</th>
+                <th>搜索量</th>
+                <th>流量占比</th>
+                <th>自然排名</th>
+                <th>广告排名</th>
+                <th>广告状态</th>
+                <th>来源</th>
+              </tr>
+            </thead>
+            <tbody id="xydcRows"></tbody>
+          </table>
+        </div>
+        <details class="debug-block">
+          <summary>西柚工具调试信息</summary>
+          <pre id="xydcDebug">等待查询</pre>
+        </details>
+      </section>
+    </main>
+
+    <script src="./data/asin-keyword-data.js"></script>
+    <script src="./assets/asin-keywords.js"></script>
+  </body>
+</html>

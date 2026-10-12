@@ -154,6 +154,19 @@ button {
   cursor: pointer;
 }
 
+.button-link {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 6px;
+  padding: 0 12px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13px;
+}
+
 .product-summary {
   display: grid;
   grid-template-columns: 220px 1fr;

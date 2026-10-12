@@ -118,6 +118,11 @@ function reportDateFromFile(filePath) {
   return match ? `${match[1]}-${match[2]}-${match[3]}` : '';
 }
 
+function reportTimeFromFile(filePath) {
+  const reportDate = reportDateFromFile(filePath);
+  return reportDate ? new Date(`${reportDate}T00:00:00Z`).getTime() : 0;
+}
+
 function tokenSet(text) {
   return new Set(normalize(text).split(/\s+/).filter(Boolean));
 }
@@ -266,16 +271,21 @@ function trimCandidates(candidates) {
 }
 
 async function findSourceFiles() {
-  const files = [];
+  const latestBySite = new Map();
   for (const dir of SOURCE_DIRS) {
     if (!fs.existsSync(dir)) continue;
     for (const name of fs.readdirSync(dir)) {
       if (/^[A-Z]{2}_热门搜索词_简单_Week_\d{4}_\d{2}_\d{2}\.csv$/i.test(name)) {
-        files.push(path.join(dir, name));
+        const filePath = path.join(dir, name);
+        const site = siteFromFile(filePath);
+        const current = latestBySite.get(site);
+        if (!current || reportTimeFromFile(filePath) > reportTimeFromFile(current)) {
+          latestBySite.set(site, filePath);
+        }
       }
     }
   }
-  return files;
+  return [...latestBySite.values()].sort((a, b) => siteFromFile(a).localeCompare(siteFromFile(b)));
 }
 
 async function analyzeFile(filePath, writers, summaries) {
