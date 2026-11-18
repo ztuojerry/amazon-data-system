@@ -88,6 +88,40 @@ function calculateProfit(row) {
   const airFreight = airUnitPrice * billableWeightKg;
   const seaFreight = seaUnitPrice * billableWeightKg;
 
+  if (price <= 0 || fx <= 0) {
+    return {
+      '售价(人民币)': 0,
+      '佣金(外币)': 0,
+      '佣金(人民币)': 0,
+      '自动配送费(外币)': round(delivery.autoFee),
+      '配送费(外币)': round(deliveryFee),
+      '配送费(人民币)': round(deliveryFeeRmb),
+      '配送费规则命中': delivery.ruleHit,
+      '配送费复核状态': delivery.reviewStatus,
+      '单品长inch': round(itemLengthInch, 3),
+      '单品宽inch': round(itemWidthInch, 3),
+      '单品高inch': round(itemHeightInch, 3),
+      '配送重量lb': round(deliveryWeightLb, 3),
+      '商品重量lb': round(productWeightLb, 3),
+      '亚马逊体积重量kg': round(amazonVolumeWeightKg, 3),
+      '亚马逊体积重量lb': round(amazonVolumeWeightLb, 3),
+      '整箱单品重量kg': round(cartonUnitWeightKg, 3),
+      '物流体积重量kg_5000': round(cartonVolumeWeight5000, 3),
+      '物流体积重量kg_6000': round(cartonVolumeWeight6000, 3),
+      '核算单品重量kg': round(billableWeightKg, 3),
+      '空运头程(人民币)': round(airFreight),
+      '空运利润(人民币)': 0,
+      '空运利润率': 0,
+      '空运投产比': 0,
+      '海运头程(人民币)': round(seaFreight),
+      '海运利润(人民币)': 0,
+      '海运利润率': 0,
+      '海运投产比': 0,
+      推荐方案: '待确认',
+      sync_status: 'pending'
+    };
+  }
+
   const airProfit = priceRmb - commissionRmb - deliveryFeeRmb - factoryCost - airFreight - extraCost;
   const seaProfit = priceRmb - commissionRmb - deliveryFeeRmb - factoryCost - seaFreight - extraCost;
 
